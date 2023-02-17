@@ -142,13 +142,23 @@ class gaze_inferer(object):
             X_batch[0, :, :, :] = frame_preprocessed
 
             Y_batch = None
+
+            end = time.perf_counter()
+            logging.info(f"_preprocess_image Time: {end - initial}")
+            start = time.perf_counter()
+
             if keyword == "filter":
+                logging.info("Filtering!")
                 Y_batch = self.filter_model.predict(framename)
             elif keyword == "gt":
                 logging.info(framename[:-3]+"npy")
                 Y_batch = self.load_gt(framename[:-3]+"npy")
             else:
                 Y_batch = self.model.predict(framename)
+
+            end = time.perf_counter()
+            logging.info(f"model.predict Time: {end - start}")
+            start = time.perf_counter()
 
             if mode == "Fit":
                 self._fitting_batch(X_batch=X_batch,
@@ -159,7 +169,8 @@ class gaze_inferer(object):
                                             idx=idx)
             
             end = time.perf_counter()
-            logging.info(f"Time: {end - initial}")
+            logging.info(f"_infer_batch Time: {end - start}")
+            logging.info(f"Total Time for image: {end - initial}")
 
         if mode == "Fit":
             # Fit eyeball models. Parameters are stored as internal attributes of Eyefitter instance.

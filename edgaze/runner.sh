@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # uncomment this if you use eye_net
-# MODEL_WEIGHTS="model_weights/eye_net.pkl"
-# MODEL_NAME="eye_net"
+MODEL_WEIGHTS="model_weights/eye_net.pkl"
+MODEL_NAME="eye_net"
 
 # uncomment this if you use pruned_eye_net
-MODEL_WEIGHTS="model_weights/pruned_eye_net.pkl"
-MODEL_NAME="pruned_eye_net"
+# MODEL_WEIGHTS="model_weights/pruned_eye_net.pkl"
+# MODEL_NAME="pruned_eye_net"
 
 # uncomment this if you use eye_net_m
 # MODEL_WEIGHTS="model_weights/eye_net_m.pkl"
@@ -25,7 +25,7 @@ do
 	for TH in "${THRESHOLDS[@]}"
 	do
 		OUTPUT_DIR="output_${MODEL_NAME}_${MD}_${TH}"
-		for num in {2..2}
+		for num in {1..1}
 		do
 			if [ $MD == "filter" ]; then
 				python editted_main.py --sequence ${num}  \
