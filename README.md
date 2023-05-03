@@ -1,2 +1,2 @@
-# Eye-Gaze-Estimation-XH
-Personal Git Repository for Testing Algorithms
+# Eye-Gaze-Estimation
+Personal git repository for testing some eye gaze estimation algorithms.
